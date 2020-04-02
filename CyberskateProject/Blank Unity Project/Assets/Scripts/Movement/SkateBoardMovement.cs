@@ -10,6 +10,8 @@ public class SkateBoardMovement : MonoBehaviour
     public float jumpHeight;
     public int addedForwardMomentum;
     public int addedJumpMomentum;
+
+    public float turnRadius;
     //class will showcase basic movement properties
     //objects with this script should be able to move left and right, accelarate, and brake
     //objects with this class should also be able to jump and manuver in the air without flying into outerspace.
@@ -46,7 +48,15 @@ public class SkateBoardMovement : MonoBehaviour
     {
         //player stops the skateborad by slamming their foot on the ground
         //in script this will make it so momentum is stopped.
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            pressTime += Time.deltaTime;
+        }
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            moveSpeed -= pressTime;
+            pressTime = 0.0f;
+        }
 
     }
 
