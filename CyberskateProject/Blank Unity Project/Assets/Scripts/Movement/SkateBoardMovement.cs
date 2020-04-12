@@ -5,14 +5,16 @@ using UnityEngine;
 public class SkateBoardMovement : MonoBehaviour
 {
     Rigidbody rb;
-    public bool falling;
-    public float pressTime = 0.0f;
-    public float moveSpeed;
-    public float multiplyer = 0;
-    public float jumpHeight;
-    public float RotateSpeed = 30f;
+    public bool falling; // if we don't wnat players to drastically move or accelerate wile in mid air
+    public float reducedSpeedOverTime; // how the speed reduces to a stop (may or may not be obselete after tutorial
+    public float moveSpeed; // current speed (may or may not be obselete after tutorial
+    public float jumpHeight; // calculated jump hight when in mid air,  (may or may not be obselete after tutorial
     public int addedForwardMomentum;
     public int addedJumpMomentum;
+    public List<GameObject> motherPoints;
+    public GameObject prop;
+    public GameObject CM;
+
 
     //for forward direction alteration
     private Vector3 targetDirection;
@@ -23,9 +25,30 @@ public class SkateBoardMovement : MonoBehaviour
     public void Start()
     {
         rb = GetComponent<Rigidbody>();
-        moveSpeed = 10.0f;
+        rb.centerOfMass = CM.transform.localPosition;
+        reducedSpeedOverTime = Time.deltaTime;
     }
-    /* commented code is what's left over from the previous version of movement
+
+
+    public void Update()
+    {
+        //actual movement and speed being added
+        rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * Input.GetAxis("Vertical") * 400f, prop.transform.position);
+        rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.up) * Input.GetAxis("Horizontal") * 30f);
+        //makes sure everythin
+        foreach (GameObject motherPoint in motherPoints)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(motherPoint.transform.position, transform.TransformDirection(Vector3.down), out hit, 3f))
+            {
+                rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.up) * Mathf.Pow(3f - hit.distance, 2) / 3f * 250f, motherPoint.transform.position);
+            }
+            Debug.Log(hit.distance);
+        }
+        rb.AddForce(-Time.deltaTime * transform.TransformVector(Vector3.right) * transform.InverseTransformVector(rb.velocity).x * 5f);
+    }
+
+    /*
     private void Accelarate()
     {
         //Player character Kicks the ground to boost their moveSpeed
@@ -99,8 +122,4 @@ public class SkateBoardMovement : MonoBehaviour
 
     }
     */
-    public void Update()
-    {
-
-    }
 }
