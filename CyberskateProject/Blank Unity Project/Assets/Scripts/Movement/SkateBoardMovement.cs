@@ -34,7 +34,7 @@ public class SkateBoardMovement : MonoBehaviour
     {
         //actual movement and speed being added
         rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.forward) * Input.GetAxis("Vertical") * 400f, prop.transform.position);
-        rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.up) * Input.GetAxis("Horizontal") * 30f);
+        rb.AddTorque(Time.deltaTime * transform.TransformDirection(Vector3.up) * Input.GetAxis("Horizontal") * 300f);
         //makes sure everythin
         foreach (GameObject motherPoint in motherPoints)
         {
