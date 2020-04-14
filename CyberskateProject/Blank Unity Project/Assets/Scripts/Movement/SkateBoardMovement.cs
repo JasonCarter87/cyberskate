@@ -11,7 +11,7 @@ public class SkateBoardMovement : MonoBehaviour
     public float jumpHeight; // calculated jump hight when in mid air,  (may or may not be obselete after tutorial
     public int addedForwardMomentum;
     public int addedJumpMomentum;
-    public List<GameObject> motherPoints;
+    public List<GameObject> motherPoints;// circular opjects that let the hoverboard hover by raycasting down. Should be at least 4 elements in size
     public GameObject prop;
     public GameObject CM;
 
