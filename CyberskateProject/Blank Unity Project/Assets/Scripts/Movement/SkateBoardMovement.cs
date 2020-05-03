@@ -41,7 +41,7 @@ public class SkateBoardMovement : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(motherPoint.transform.position, transform.TransformDirection(Vector3.down), out hit, 3f))
             {
-                rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.up) * Mathf.Pow(3f - hit.distance, 2) / 3f * 250f, motherPoint.transform.position);
+                rb.AddForceAtPosition(Time.deltaTime * transform.TransformDirection(Vector3.up) * Mathf.Pow(3f - hit.distance, 2) / 3f * 300f, motherPoint.transform.position);
             }
             Debug.Log(hit.distance);
         }
